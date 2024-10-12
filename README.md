@@ -16,4 +16,4 @@ File Handling: For resume uploads
 Flask for web framework
 Selenium and BeautifulSoup for web scraping
 
-The full Job Automate Project with a refined User Interface is available at : http://127.0.0.1:5000/
+The full Job Automate Project with a refined User Interface is available at : https://job-automate-ui.vercel.app/
