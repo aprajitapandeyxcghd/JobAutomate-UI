@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Automation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Job Application Automation</h1>
+        <form id="job-form" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="job_preferences">Job Preferences (comma-separated):</label>
+                <input type="text" name="job_preferences" id="job_preferences" class="input-field" required>
+            </div>
+
+            <div class="form-group">
+                <label for="experience_level">Experience Level:</label>
+                <select name="experience_level" id="experience_level" class="input-field" required>
+                    <option value="Entry Level">Entry Level</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Full-Time">Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="introduction">Introduce Yourself:</label>
+                <textarea name="introduction" id="introduction" class="input-field" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="why_hire">Why Should We Hire You?</label>
+                <textarea name="why_hire" id="why_hire" class="input-field" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="resume">Upload Resume:</label>
+                <input type="file" name="resume" id="resume" class="input-field" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Apply to All Jobs</button>
+        </form>
+
+        <p id="confirmation-message" style="display: none;">Your resume will be uploaded to all related upcoming and existing job postings.</p>
+    </div>
+
+    <script>
+        document.getElementById('job-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+              .then(data => {
+                  document.getElementById('confirmation-message').style.display = 'block';
+              }).catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
